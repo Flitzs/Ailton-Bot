@@ -1,0 +1,33 @@
+message.content === '-ping'
+
+C:\Users\Usuario\Documents\JV\Program thingys\Ailton_Bot
+
+if (msg.channel == 'Channel Id' && msg.content === 'ping'){
+        msg.reply('🏓');
+}
+
+console.log(!isNaN(123));
+'✅'
+function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
+
+const exampleEmbed = new msg_e.MessageEmbed()
+	.setColor('#FFFF33');
+	.setTitle('Commands Help');
+	.setURL('https://discord.js.org/');
+	.setAuthor('Ailton', '/imgs/Ailton Bot pic.jpg', 'https://discord.js.org');
+	.setDescription('!ping 🏓, !beep🤖, !server💻, ');
+	.setThumbnail('/imgs/Ailton Bot pic.jpg');
+	.addFields(
+		{ name: 'Main Dice Function (α)', value: "just type the maximum number of the dice you wish to use. Ex: type '20' if you want to roll a 'd20'" },
+		{ name: '\u200B', value: '\u200B' },
+	)
+	.setTimestamp();
+	.setFooter('Me, Myself & I Corp', '/imgs/Ailton Bot pic.jpg');
+
+function gotMessage(msg){
+    let x = msg.content;
+    console.log(x);
+    if (msg.content.startsWith(`${prefix}help`)) {
+        msg.channel.send({ embeds: [exampleEmbed] });
+    }
+}
