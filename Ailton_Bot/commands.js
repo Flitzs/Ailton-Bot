@@ -13,30 +13,36 @@ module.exports = async function gotMessage(msg){
         if(!isNaN(an)){
             let d = an;
             var r = Math.floor(Math.random() * d + 1);
-            msg.reply('\n`'+ r + '` ⇐ 1d' + d);
+            msg.reply('\n` '+ r +' ` ⇐ 1d' + d);
         }
     } 
-    if (an == ('ping')) {
+    let tokens = msg.content.split(" ")
+    if (tokens[0] == ('ping')) {
 		msg.channel.send('🏓');
-	} else if (an == (`beep`)) {
+	} else if (tokens[0] == (`beep`)) {
 		msg.channel.send('Bop 🤖');
-	} else if (an == (`server-info`)) {
+	} else if (tokens[0] == (`server-info`)) {
         msg.reply("\n`Server name: ${msg.guild.name}   \nTotal members: ${msg.guild.memberCount}`");
-    } else if (an == (`user-info`)){
+    } else if (tokens[0] == (`user-info`)){
         msg.reply("\n`Username: ${msg.author.username}\nYour ID: ${msg.author.id}`");
-    } else if (an == (`rules`)){
+    } else if (tokens[0] == (`rules`)){
         msg.channel.send(newEmbed);
-    } else if(an == ('gif')){
-        let url = `https://g.tenor.com/v1/search?q=animekiss&key=&limit=8`;
+    } else if(tokens[0] == ('!gif')){
+        let keywords = 'Matthew Mercer';
+        if (tokens.length > 1){
+            keywords = tokens.slice(1,tokens.length).join(" ");
+        }
+        let url = `https://g.tenor.com/v1/search?q=${keywords}&key=LIVDSRZULELA&contentfilter=off`;
         let response =  await fetch(url);
-        let jason = await response.json();
-        console.log(jason)
-        //msg.channel.send(jason.results[1])   
-        msg.channel.send(`https://tenor.com/view/kiss-matthew-mercer-matt-mercer-critical-role-gif-13669574`)
+        let json = await response.json();
+        console.log(json);
+        const index = Math.floor(Math.random() * json.results.length);
+        msg.channel.send(json.results[index].url);
     }
     if (r === 1){
-        msg.channel.send('`F is in the chat boyz`');
+        msg.channel.send('` F is in the chat boyz `');
     } else if (r === 20){
-        msg.channel.send('`NOICE`');
+        msg.channel.send('` NOICE `');
     }
 }
+
