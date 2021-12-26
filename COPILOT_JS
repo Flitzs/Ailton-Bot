@@ -1,0 +1,46 @@
+require('dotenv').congif();
+const TOKEN = process.env.TOKEN;
+const PREFIX = "ail"
+
+const Discord = require('discord.js');
+const client = new Discord.Client({ intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES]});
+
+client.on('ready', () => {
+   console.log('We're on as ${client.user.tag}!');
+});
+
+client.on('message', msg => {
+  if (!msg.content.startsWith(process.env.PREFIX)) return;
+  
+  const args = msg.content.slice(PREFIX.length).split(/ +/)
+  const command = args.shift()toLowerCase();
+  
+  if (command === 'ping) {
+    msg.reply('pong')
+  }
+  
+  //embed with user avatar
+  if (command === 'avatar') {
+    const embed = new Discord.MessageEmbed()
+       .setTitle('User Avatar')
+       .setColor('#0099ff')
+       .setThumbnail(msg.author.avatarURL())
+       .setTimestamp()
+    msg.channel.send((embeds: [embed]})
+  } 
+  
+  if (command === 'membercount') {
+    msg.reply('There are ${msg.guild.memberCount} members')
+  }
+  
+  if (command === 'poll' {
+    msg.channel.send('React with :white_check_mark: or :x: to vote.')
+       .then(function (message) {
+         message.react('✅');
+         message.react('❌');
+       }); 
+  }
+  
+})
+
+client.login(TOKEN);
